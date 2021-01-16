@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: echo-app-index
+  namespace: default
+data:
+  index.html: |
+    <!doctype html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>Echo App Index</title>
+    </head>
+    <body>
+      <h1>I'm mounted</h1>
+    </body>
+    </html>
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-app-deployment
+  namespace: default
+  labels:
+    app: echo-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: echo-app
+  template:
+    metadata:
+      labels:
+        app: echo-app
+    spec:
+      containers:
+      - name: echo-app
+        image: redhatua/echo
+        imagePullPolicy: Never
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: configmap-volume
+          mountPath: /app/index.html
+          subPath: index.html
+      volumes:
+        - name: configmap-volume
+          configMap:
+            name: echo-app-index
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo-app-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: echo-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
