@@ -24,6 +24,7 @@ class EchoServer(Server.BaseHTTPRequestHandler):
                 return self.wfile.write(file.read())
         return self.wfile.write("Given sting: {}, Local IP: {}".format(self.path, myIp).encode('utf-8'))
 
+    # TODO: Implement switch method and use it to disallow all request methods except GET
     def do_POST(self):
         self._header(HTTPStatus.METHOD_NOT_ALLOWED)
 
