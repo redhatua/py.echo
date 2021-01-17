@@ -24,7 +24,7 @@ metadata:
   labels:
     app: echo-app
 spec:
-  replicas: 3
+  replicas: 3 # 3 replicas by default to show that we route traffic to the different instances by checking their IP's
   selector:
     matchLabels:
       app: echo-app
@@ -35,8 +35,8 @@ spec:
     spec:
       containers:
       - name: echo-app
-        image: redhatua/echo
-        imagePullPolicy: Never
+        image: redhatua/echo # replace me
+        imagePullPolicy: Always
         resources:
           requests:
             memory: "64Mi"
