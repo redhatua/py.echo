@@ -1,5 +1,5 @@
 # Simple echo server written in python
-This app displays any requested URI as string and also show IP address of machine where it's running. If URI is `/index.html` this static page will be displayed.
+This app displays any requested URI as string and also shows IP address of machine where it's running. If the URI is `/index.html` this static page will be displayed.
 
 ## Before you go...
 ### To build, prepare environment and deploy application to AWS these steps should be done.
@@ -25,7 +25,7 @@ $ terraform apply
 ```
 :memo: Note: `terraform apply` with `-auto-approve` can be used as well
 
-#### Getting EBS cluster access
+#### Getting EKS cluster access
 ```shell
 $ aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
 ```
