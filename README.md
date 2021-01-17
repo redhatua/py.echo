@@ -9,7 +9,7 @@ This app displays any requested URI as string and also shows IP address of machi
     - kubectl
     - terraform
     - wget
-#### AWS account with [these](https://github.com/redhatua/py.echo/IAM.md) IAM permissions
+#### AWS account with [these](https://github.com/redhatua/py.echo/blob/master/IAM.md) IAM permissions
 #### awscli configured with given credentials
 
 ## How to:
